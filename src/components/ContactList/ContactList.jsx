@@ -1,5 +1,3 @@
-import css from './ContactList.module.css';
-
 export default function ContactList({ contacts, filter, onDelete }) {
   if (filter !== '') {
     return (
