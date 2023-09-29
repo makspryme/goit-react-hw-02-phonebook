@@ -7,12 +7,18 @@ export default function ContactList({ contacts, filter, onDelete }) {
             return (
               <li key={contact.id} id={contact.id}>
                 {`${contact.name} - ${contact.number}`}
-                <button type="text" onClick={e => {
-                onDelete(e.target.parentElement);
-              }}>delete</button>
+                <button
+                  type="text"
+                  onClick={e => {
+                    onDelete(e.target.parentElement);
+                  }}
+                >
+                  delete
+                </button>
               </li>
             );
           }
+          return;
         })}
       </ul>
     );
