@@ -18,7 +18,8 @@ export default function ContactList({ contacts, filter, onDelete }) {
               </li>
             );
           }
-          return;
+
+          return <li>Contact not found</li>;
         })}
       </ul>
     );
