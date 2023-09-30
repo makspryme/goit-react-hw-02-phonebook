@@ -1,4 +1,4 @@
-export default function Filter({ filter, contacts, value, onChange }) {
+export default function Filter({ value, onChange }) {
   return (
     <label>
       Find contact by name

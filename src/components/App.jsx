@@ -20,9 +20,8 @@ export default class App extends Component {
     }));
   };
 
-  handleInputChange = e => {
-    const { name, value } = e.currentTarget;
-    this.setState({ [name]: value });
+  handleFilterChange = e => {
+    this.setState({ filter: e.currentTarget.value });
   };
 
   handleSubmitForm = newContact => {
@@ -32,19 +31,22 @@ export default class App extends Component {
   };
 
   render() {
+    const { contacts, filter } = this.state;
+    const filteredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLocaleLowerCase())
+    );
+
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm
           onSubmit={this.handleSubmitForm}
-          onInputChange={this.handleInputChange}
           isContact={this.state.contacts}
         />
         <h2>Contacts</h2>
-        <Filter value={this.state.filter} onChange={this.handleInputChange} />
+        <Filter value={this.state.filter} onChange={this.handleFilterChange} />
         <ContactList
-          contacts={this.state.contacts}
-          filter={this.state.filter}
+          filtered={filteredContacts}
           onDelete={this.removerContacts}
         />
       </div>
