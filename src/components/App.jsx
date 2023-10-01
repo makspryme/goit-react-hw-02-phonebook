@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Filter from './Filter/Filter';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
+import { nanoid } from 'nanoid';
 
 export default class App extends Component {
   state = {
@@ -25,6 +26,18 @@ export default class App extends Component {
   };
 
   handleSubmitForm = newContact => {
+    for (const { name } of this.state.contacts) {
+      if (name === newContact.name) {
+        alert(`${name} is already in contacts`);
+        return;
+      }
+    }
+
+    newContact = {
+      ...newContact,
+      id: nanoid(),
+    };
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
     }));
@@ -39,10 +52,7 @@ export default class App extends Component {
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm
-          onSubmit={this.handleSubmitForm}
-          isContact={this.state.contacts}
-        />
+        <ContactForm onSubmit={this.handleSubmitForm} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.handleFilterChange} />
         <ContactList
